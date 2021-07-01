@@ -26,7 +26,7 @@ def insert_sql(dataframe, table_name, schema):
 # =============================================================================
 data = PyDST.get_data(table_id = 'DNVALD', variables = {'KURTYP':'KBH'
                                                         ,'VALUTA':'USD'
-                                                        ,'Tid':'20*'})
+                                                        ,'Tid':'202*'})
 
 # Read dst query into dataframe and add relevant columns with info
 df = PyDST.utils.to_dataframe(data)
