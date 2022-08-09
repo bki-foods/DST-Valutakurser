@@ -13,12 +13,14 @@ executionId = int(now.timestamp())
 script_name = 'dst valutakurser.py'
 timestamp = datetime.datetime.now()
 
-params = urllib.parse.quote_plus('DRIVER={SQL Server Native Client 11.0};SERVER=sqlsrv04;DATABASE=BKI_Datastore;Trusted_Connection=yes')
-engine = create_engine('mssql+pyodbc:///?odbc_connect=%s' % params)
+server_04 = "sqlsrv04"
+db_ds = "BKI_Datastore"
+params_ds = f"DRIVER={{SQL Server Native Client 11.0}};SERVER={server_04};DATABASE={db_ds};trusted_connection=yes"
+con_ds = create_engine('mssql+pyodbc:///?odbc_connect=%s' % urllib.parse.quote_plus(params_ds))
 
 # Function for insert into SQL database
 def insert_sql(dataframe, table_name, schema):
-    dataframe.to_sql(table_name, con=engine, schema=schema, if_exists='append', index=False)
+    dataframe.to_sql(table_name, con=con_ds, schema=schema, if_exists='append', index=False)
 
 # =============================================================================
 # Get data from danmarks statistik. One query per currency. Time = 2000 - 2099
